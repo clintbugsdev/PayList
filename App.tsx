@@ -95,7 +95,10 @@ function App(): JSX.Element {
         backgroundColor={backgroundStyle.backgroundColor}
       />
       <NavigationContainer>
-        <Stack.Navigator>
+        <Stack.Navigator screenOptions={{
+          headerStyle: { backgroundColor: GlobalStyles.colors.primary500 },
+          headerTintColor: 'white'
+        }}>
           <Stack.Screen
             name="ExpensesOverview"
             component={ExpensesOverview}
@@ -104,6 +107,7 @@ function App(): JSX.Element {
           <Stack.Screen
             name="ManageExpense"
             component={ManageExpense}
+            options={{ presentation: 'modal' }}
           />
         </Stack.Navigator>
       </NavigationContainer>
