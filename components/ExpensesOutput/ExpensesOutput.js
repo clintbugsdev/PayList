@@ -1,77 +1,20 @@
-import { StyleSheet, View } from 'react-native';
+import { StyleSheet, View, Text } from 'react-native';
 import { GlobalStyles } from '../../constants/styles';
 
 import ExpensesSummary from './ExpensesSummary';
 import ExpensesList from './ExpensesList';
 
-const DUMMY_EXPENSES = [
-    {
-        id: 'e1',
-        description: 'A pair of shoes',
-        amount: 59.99,
-        date: new Date('2021-12-19')
-    },
-    {
-        id: 'e2',
-        description: 'A pair of pants',
-        amount: 89.99,
-        date: new Date('2021-12-22')
-    },
-    {
-        id: 'e3',
-        description: 'Adobo',
-        amount: 19.00,
-        date: new Date('2021-12-23')
-    },
-    {
-        id: 'e4',
-        description: 'Book',
-        amount: 19.00,
-        date: new Date('2022-1-25')
-    },
-    {
-        id: 'e5',
-        description: 'iPhone',
-        amount: 1000.00,
-        date: new Date('2021-2-25')
-    },
-    {
-        id: 'e6',
-        description: 'A pair of shoes',
-        amount: 59.99,
-        date: new Date('2021-2-19')
-    },
-    {
-        id: 'e7',
-        description: 'A pair of pants',
-        amount: 89.99,
-        date: new Date('2021-3-22')
-    },
-    {
-        id: 'e8',
-        description: 'Adobo',
-        amount: 19.00,
-        date: new Date('2021-3-23')
-    },
-    {
-        id: 'e9',
-        description: 'Book',
-        amount: 19.00,
-        date: new Date('2021-3-25')
-    },
-    {
-        id: 'e10',
-        description: 'iPhone',
-        amount: 1000.00,
-        date: new Date('2021-4-25')
-    },
-];
+function ExpensesOutput({ expenses, expensesPeriod, fallbackText }) {
+    let content = (<Text style={styles.infoText}>{fallbackText}</Text>)
 
-function ExpensesOutput({ expenses, expensesPeriod }) {
+    if (expenses.length > 0) {
+        content = <ExpensesList expenses={expenses} />;
+    }
+
     return (
         <View style={styles.container}>
-            <ExpensesSummary expenses={DUMMY_EXPENSES} periodName={expensesPeriod} />
-            <ExpensesList expenses={DUMMY_EXPENSES} />
+            <ExpensesSummary expenses={expenses} periodName={expensesPeriod} />
+            {content}
         </View>
     );
 }
@@ -85,5 +28,11 @@ const styles = StyleSheet.create({
         paddingTop: 24,
         paddingBottom: 0,
         backgroundColor: GlobalStyles.colors.primary700
+    },
+    infoText: {
+        color: 'white',
+        fontSize: 16,
+        textAlign: 'center',
+        marginTop: 32
     }
 });
